@@ -1,0 +1,15 @@
+- Data
+	- content
+	- img, video
+	- user
+
+- UX, DOM
+
+- Layout, CSS, HTML
+	- responsive: flex/grid
+
+- Slide
+
+
+- Idea
+	- lam game
