@@ -3,7 +3,7 @@ JSA Final Project
 
 ## Framework / Game Engine
 * Phaser ( https://phaser.io ) - rất thiên về JS, không có mấy CSS và HTML
-** Documentation: https://photonstorm.github.io/phaser3-docs/index.html
+* Documentation: https://photonstorm.github.io/phaser3-docs/index.html
 
 ## Mục tiêu:
   ### Đợt 1:
