@@ -12,4 +12,8 @@
 
 
 - Idea
-	- lam game
+-  game
+	- level (5)
+	- shop (weapon/shield)
+	- character (4 sides) directions (wasd)
+	
