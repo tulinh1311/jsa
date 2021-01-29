@@ -1,16 +1,12 @@
+var gameState = {};
 var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 200 }
-        }
-    },
     scene: {
         preload: preload,
-        create: create
+        create: create,
+        update: update
     }
 };
 
@@ -18,30 +14,60 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.setBaseURL('http://labs.phaser.io');
-
-    this.load.image('sky', 'assets/skies/space3.png');
-    this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-    this.load.image('red', 'assets/particles/red.png');
+    // background image 
+    this.load.image('sky', 'https://labs.phaser.io/assets/skies/space3.png');
+    // player
+    this.load.spritesheet('player', 'resource/simple-sprite.png', { frameWidth: 64, frameHeight: 64 })
 }
 
 function create ()
 {
     this.add.image(400, 300, 'sky');
+    gameState.player = this.add.sprite(400, 300, 'player');
 
-    var particles = this.add.particles('red');
-
-    var emitter = particles.createEmitter({
-        speed: 100,
-        scale: { start: 1, end: 0 },
-        blendMode: 'ADD'
+    this.anims.create({
+        key: 'up',
+        frames: this.anims.generateFrameNumbers('player', { start: 0, end: 8 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'left',
+        frames: this.anims.generateFrameNumbers('player', { start: 9, end: 17 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'down',
+        frames: this.anims.generateFrameNumbers('player', { start: 18, end: 26 }),
+        frameRate: 10,
+        repeat: -1
+    });
+    this.anims.create({
+        key: 'right',
+        frames: this.anims.generateFrameNumbers('player', { start: 27, end: 35 }),
+        frameRate: 10,
+        repeat: -1
     });
 
-    var logo = this.physics.add.image(400, 100, 'logo');
+    gameState.cursors = this.input.keyboard.createCursorKeys();
+}
 
-    logo.setVelocity(100, 200);
-    logo.setBounce(1, 1);
-    logo.setCollideWorldBounds(true);
-
-    emitter.startFollow(logo);
+function update() {
+    if (gameState.cursors.right.isDown) {
+        gameState.player.x += 2
+        gameState.player.anims.play('right', true);
+      }
+      if (gameState.cursors.left.isDown) {
+        gameState.player.x -= 2
+        gameState.player.anims.play('left', true);
+      }
+      if (gameState.cursors.up.isDown) {
+        gameState.player.y -= 2;
+        gameState.player.anims.play('up', true);
+      }
+      if (gameState.cursors.down.isDown) {
+        gameState.player.y += 2;
+        gameState.player.anims.play('down', true);
+      }
 }
