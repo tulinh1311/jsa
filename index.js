@@ -15,9 +15,9 @@ var game = new Phaser.Game(config);
 function preload ()
 {
     // background image 
-    this.load.image('sky', 'https://labs.phaser.io/assets/skies/space3.png');
+    this.load.image('sky', 'https://labs.phaser.io/assets/skies/starfield.png');
     // player
-    this.load.spritesheet('player', 'resource/simple-sprite.png', { frameWidth: 64, frameHeight: 64 })
+    this.load.spritesheet('player', 'resource/spritesheet.png', { frameWidth: 64, frameHeight: 64 })
 }
 
 function create ()
@@ -27,27 +27,32 @@ function create ()
 
     this.anims.create({
         key: 'up',
-        frames: this.anims.generateFrameNumbers('player', { start: 0, end: 8 }),
+        frames: this.anims.generateFrameNumbers('player', { start: 192, end: 200 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
         key: 'left',
-        frames: this.anims.generateFrameNumbers('player', { start: 9, end: 17 }),
+        frames: this.anims.generateFrameNumbers('player', { start: 216, end: 228 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
         key: 'down',
-        frames: this.anims.generateFrameNumbers('player', { start: 18, end: 26 }),
+        frames: this.anims.generateFrameNumbers('player', { start: 240, end: 248 }),
         frameRate: 10,
         repeat: -1
     });
     this.anims.create({
         key: 'right',
-        frames: this.anims.generateFrameNumbers('player', { start: 27, end: 35 }),
+        frames: this.anims.generateFrameNumbers('player', { start: 264, end: 272 }),
         frameRate: 10,
         repeat: -1
+    });
+    this.anims.create({
+        key: 'nonw',
+        frames: this.anims.generateFrameNumbers('player', { frame: 18 }),
+        frameRate: 20,
     });
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
@@ -58,16 +63,19 @@ function update() {
         gameState.player.x += 2
         gameState.player.anims.play('right', true);
       }
-      if (gameState.cursors.left.isDown) {
-        gameState.player.x -= 2
-        gameState.player.anims.play('left', true);
-      }
-      if (gameState.cursors.up.isDown) {
-        gameState.player.y -= 2;
-        gameState.player.anims.play('up', true);
-      }
-      if (gameState.cursors.down.isDown) {
-        gameState.player.y += 2;
-        gameState.player.anims.play('down', true);
-      }
+    else if (gameState.cursors.left.isDown) {
+    gameState.player.x -= 2
+    gameState.player.anims.play('left', true);
+    }
+    else if (gameState.cursors.up.isDown) {
+    gameState.player.y -= 2;
+    gameState.player.anims.play('up', true);
+    }
+    else if (gameState.cursors.down.isDown) {
+    gameState.player.y += 2;
+    gameState.player.anims.play('down', true);
+    }
+    else {
+    gameState.player.anims.play('none');
+    }
 }
