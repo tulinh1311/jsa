@@ -1,9 +1,11 @@
 # Game trông giống Soul Knight
 JSA Final Project
 
-## Framework / Game Engine
-* Phaser ( https://phaser.io ) - rất thiên về JS, không có mấy CSS và HTML
-* Documentation: https://photonstorm.github.io/phaser3-docs/index.html
+## Framework / Game Engine / Other Material
+* Phaser ( https://phaser.io ) - rất thiên về JS, không có mấy CSS và HTML. 
+  ** Documentation: https://photonstorm.github.io/phaser3-docs/index.html
+* Chắc sẽ lấy hình ảnh cho nhân vật từ đây: https://github.com/sanderfrenken/Universal-LPC-Spritesheet-Character-Generator
+  ** Bản preview: https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/
 
 ## Mục tiêu:
   ### Đợt 1:
