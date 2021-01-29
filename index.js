@@ -33,7 +33,7 @@ function create ()
     });
     this.anims.create({
         key: 'left',
-        frames: this.anims.generateFrameNumbers('player', { start: 216, end: 228 }),
+        frames: this.anims.generateFrameNumbers('player', { start: 216, end: 224 }),
         frameRate: 10,
         repeat: -1
     });
