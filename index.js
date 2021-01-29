@@ -35,7 +35,7 @@ function preload() {
 }
 
 function create() {
-    this.add.image(200, 150, 'sky');
+    // this.add.image(200, 150, 'sky');
     const map = this.make.tilemap({ key: 'dungeon'})
     const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles')
     map.createLayer(0, tileset, 0, 0)
@@ -99,7 +99,8 @@ function create() {
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(gameState.player, wallLayer);
-    this.cameras.main.startFollow(gameState.player)
+    this.cameras.main.startFollow(gameState.player);
+    this.minimap = this.cameras.add(0, 0, 200, 200).setZoom(0.05)
     // spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 };
 function slash() {
