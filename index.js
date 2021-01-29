@@ -5,13 +5,20 @@ var config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 0 },
+            debug: true
+        }
+    },
     scene: {
         preload: preload,
         create: create,
         update: update,
     },
     scale: {
-        zoom: 1.25
+        zoom: 1.15
     }
 };
 var number = 64;
@@ -32,11 +39,14 @@ function create() {
     const map = this.make.tilemap({ key: 'dungeon'})
     const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles')
     map.createLayer(0, tileset, 0, 0)
-    map.createLayer(1, tileset, 0, 0)
+    const wallLayer = map.createLayer(1, tileset, 0, 0)
     map.createLayer(2, tileset, 0, 0)
     map.createLayer(3, tileset, 0, 0)
-    gameState.player = this.add.sprite(200, 150, 'player');
 
+    wallLayer.setCollisionByProperty({ collides: true })
+    
+    gameState.player = this.physics.add.sprite(200, 150, 'player');
+    gameState.player.body.setSize(gameState.player.width*0.5, gameState.player.height*0.85)
     gameState.player.anims.create({
         key: 'up',
         frames: this.anims.generateFrameNumbers('player', { start: 192, end: 200 }),
@@ -88,6 +98,8 @@ function create() {
     });
 
     gameState.cursors = this.input.keyboard.createCursorKeys();
+    this.physics.add.collider(gameState.player, wallLayer);
+    this.cameras.main.startFollow(gameState.player)
     // spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 };
 function slash() {
@@ -108,27 +120,28 @@ function slash() {
         gameState.player.anims.play('slash-down', true);
     }
 }
+var speed = 100
 function update() {
     if (gameState.cursors.right.isDown) {
-        gameState.player.x += 2
+        gameState.player.setVelocity(speed, 0)
         gameState.player.anims.play('right', true);
         playerDirection = 'right'
 
     }
     else if (gameState.cursors.left.isDown) {
-        gameState.player.x -= 2
+        gameState.player.setVelocity(-speed, 0)
         gameState.player.anims.play('left', true);
         playerDirection = 'left'
 
     }
     else if (gameState.cursors.up.isDown) {
-        gameState.player.y -= 2;
+        gameState.player.setVelocity(0, -speed)
         gameState.player.anims.play('up', true);
         playerDirection = 'up'
 
     }
     else if (gameState.cursors.down.isDown) {
-        gameState.player.y += 2;
+        gameState.player.setVelocity(0, speed)
         gameState.player.anims.play('down', true);
         playerDirection = 'down'
     }
@@ -140,6 +153,7 @@ function update() {
 
     else {
         gameState.player.anims.stop()
+        gameState.player.setVelocity(0,0)
     }
 
 }
