@@ -6,7 +6,7 @@ JSA Final Project
   ** Documentation: https://photonstorm.github.io/phaser3-docs/index.html
 * Chắc sẽ lấy hình ảnh cho nhân vật từ đây: https://github.com/sanderfrenken/Universal-LPC-Spritesheet-Character-Generator
   ** Bản preview: https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/
-
+* Map: Tutorial: https://youtu.be/_fK6MVLPrMA - sẽ dùng https://www.mapeditor.org để làm map và dùng tileset của https://0x72.itch.io/dungeontileset-ii
 ## Mục tiêu:
   ### Đợt 1:
   * Hoàn thiện bản đồ (map - 5 phòng), người chơi (player), quái.
