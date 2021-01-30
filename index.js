@@ -13,7 +13,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            // debug: true
+            debug: true
         }
     },
     scene: {
@@ -65,7 +65,8 @@ function create() {
     //tạo player
     gameState.player = this.physics.add.sprite(640, 1050, 'player', 240);
     // sửa khung của player - tuyệt đói không xóa đi
-    gameState.player.body.setSize(gameState.player.width * 0.5, gameState.player.height * 0.85)
+    gameState.player.body.setSize(gameState.player.width * 0.5, gameState.player.height * 0.5)
+    gameState.player.body.offset.y = 33
     gameState.skeleton = this.add.sprite(600, 670, 'skeleton', 131)
 
     // const skeletons = this.physics.add.group({
