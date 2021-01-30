@@ -1,5 +1,6 @@
 # Game trông giống Soul Knight
 JSA Final Project
+Preview: https://tulinh1311.github.io/jsa/
 
 ## Framework / Game Engine / Other Material
 * Phaser ( https://phaser.io ) - rất thiên về JS, không có mấy CSS và HTML. 
