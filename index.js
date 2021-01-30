@@ -1,5 +1,16 @@
+import { createCharacterAnims } from "./module/CharacterAnims.js";
+import { createSkeletonAnims } from "./module/EnemyAnims.js";
+import { healthBar } from "./module/HealthBar.js";
+import { moveDown, moveLeft, moveRight, moveUp } from "./module/Move.js";
+import { preloader } from "./module/Preloader.js";
+
 // gọi các biến, không xóa
 var gameState = {};
+var goLeft = false;
+var goRight = false;
+var goUp = false;
+var goDown = false;
+var ifSlash = false;
 var playerDirection;
 const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth)
 const DEFAULT_HEIGHT = 400 // any height you want
@@ -13,9 +24,12 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: true
+            // debug: true
         }
     },
+    input :{
+		activePointers:3,
+	  },
     scene: {
         preload: preload,
         create: create,
@@ -34,24 +48,13 @@ var game = new Phaser.Game(config);
 
 // các hình ảnh sẽ được up lên trước và lưu tại đây
 function preload() {
-    // this.load.image('sky', 'https://labs.phaser.io/assets/skies/starfield.png');
-    this.load.audio('main_audio', 'https://labs.phaser.io/assets/audio/Andrea_Milana_-_Harlequin_-_The_Clockworks_-_Electribe_MX_REMIX.m4a')
-    // gạch trong dungeon
-    this.load.image('tiles', 'resource/0x72_DungeonTilesetII_v1.3.1/tileset.png');
-    // dungeon map
-    this.load.tilemapTiledJSON('dungeon', 'resource/dungeon.json')
-    // player
-    this.load.spritesheet('player', 'resource/spritesheet.png', { frameWidth: number, frameHeight: number })
-    this.load.spritesheet('slash', 'resource/slash-sprite.png', { frameWidth: number * 3, frameHeight: number * 3 })
-    this.load.spritesheet('skeleton', 'resource/skeleton.png', { frameWidth: number, frameHeight: number })
+    preloader(this)
 }
+
 // khởi tạo các thành phần trong game
 function create() {
     // tạo dungeon
-    const music = this.sound.add("main_audio")
-    for (let i = 0; i<10; i++) {
-        music.play();
-    }
+    const music = this.sound.add("main_audio", { loop: true })
     const map = this.make.tilemap({ key: 'dungeon' })
     const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles', 16, 16, 1, 2)
     map.createLayer(0, tileset, 0, 0)
@@ -69,114 +72,8 @@ function create() {
     gameState.player.body.offset.y = 33
     gameState.skeleton = this.add.sprite(600, 670, 'skeleton', 131)
 
-    // const skeletons = this.physics.add.group({
-    //     classType: Skeleton
-    // })
-    // skeletons.get(600, 670, 'skeleton')
-
-    // phần animation - gọi ra trước, dùng sau
-    // khi di chuyển
-    gameState.player.anims.create({
-        key: 'up',
-        frames: this.anims.generateFrameNumbers('player', { start: 192, end: 200 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.player.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('player', { start: 216, end: 224 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.player.anims.create({
-        key: 'down',
-        frames: this.anims.generateFrameNumbers('player', { start: 240, end: 248 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.player.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('player', { start: 264, end: 272 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    // khi chém
-    gameState.player.anims.create({
-        key: 'slash-up',
-        frames: this.anims.generateFrameNumbers('slash', { start: 0, end: 5 }),
-        frameRate: 10,
-        repeat: 1
-    });
-    gameState.player.anims.create({
-        key: 'slash-left',
-        frames: this.anims.generateFrameNumbers('slash', { start: 6, end: 11 }),
-        frameRate: 10,
-        repeat: 1
-    });
-    gameState.player.anims.create({
-        key: 'slash-down',
-        frames: this.anims.generateFrameNumbers('slash', { start: 12, end: 17 }),
-        frameRate: 10,
-        repeat: 1
-    });
-    gameState.player.anims.create({
-        key: 'slash-right',
-        frames: this.anims.generateFrameNumbers('slash', { start: 18, end: 23 }),
-        frameRate: 10,
-        repeat: 1
-    });
-
-    // skeleton khi di chuyen
-    gameState.skeleton.anims.create({
-        key: 'skeleton-idle-up',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 8 * 13, end: 8 * 13 + 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.skeleton.anims.create({
-        key: 'skeleton-idle-left',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 9 * 13, end: 9 * 13 + 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.skeleton.anims.create({
-        key: 'skeleton-idle-down',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 10 * 13, end: 10 * 13 + 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.skeleton.anims.create({
-        key: 'skeleton-idle-right',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 11 * 13, end: 11 * 13 + 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-
-    // skeleton khi dam
-    gameState.skeleton.anims.create({
-        key: 'skeleton-thrust-up',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 4 * 13, end: 4 * 13 + 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.skeleton.anims.create({
-        key: 'skeleton-thrust-left',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 5 * 13, end: 5 * 13 + 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.skeleton.anims.create({
-        key: 'skeleton-thrust-down',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 6 * 13, end: 6 * 13 + 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
-    gameState.skeleton.anims.create({
-        key: 'skeleton-thrust-right',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 7 * 13, end: 7 * 13 + 7 }),
-        frameRate: 10,
-        repeat: -1
-    });
+    createCharacterAnims(gameState.player.anims)
+    createSkeletonAnims(gameState.skeleton.anims)
 
     // tạo bàn phím cho người chơi
     gameState.cursors = this.input.keyboard.createCursorKeys();
@@ -186,17 +83,14 @@ function create() {
     this.cameras.main.startFollow(gameState.player);
     // minimap ở trên cùng
     this.minimap = this.cameras.add(-50, -30, 200, 200).setZoom(0.05)
-    const baseBar = this.add.graphics();
-    baseBar.fillRoundedRect(10, 10, 200, 20, 5);
-    baseBar.fillStyle(0x2bc213)
-    baseBar.setScrollFactor(0, 0)
-    gameState.bloodBar = this.add.graphics();
-    gameState.bloodBar.fillRoundedRect(10, 10, healthpoints * 2, 20, 5);
-    gameState.bloodBar.fillStyle(0x808080)
-    gameState.bloodBar.setScrollFactor(0, 0)
+    healthBar(this)
 
-    gameState.healthText = this.add.text(13, 13, '100/100', { fill: '#fff' })
-    gameState.healthText.setScrollFactor(0, 0)
+    gameState.arrowUp = this.add.image(100, 250, 'arrowUp').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goUp = true; this.alpha = 1}).on('pointerup', function () { goUp = false ; this.alpha = 0.7 });
+    gameState.arrowDown = this.add.image(100, 350, 'arrowDown').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goDown = true; this.alpha = 1 }).on('pointerup', function () { goDown = false; this.alpha = 0.7 });
+    gameState.arrowLeft = this.add.image(50, 300, 'arrowLeft').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goLeft = true; this.alpha = 1 }).on('pointerup', function () { goLeft = false; this.alpha = 0.7 });
+    gameState.arrowRight = this.add.image(150, 300, 'arrowRight').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goRight = true; this.alpha = 1 }).on('pointerup', function () { goRight = false; this.alpha = 0.7 });
+    gameState.slashButton = this.add.circle(700, 300, 50, 0xffffff, 0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { ifSlash = true; this.alpha = 1 }).on('pointerup', function () { ifSlash = false; this.alpha = 0.7 });
+    this.add.text(672, 295, 'Attack').setScrollFactor(0, 0)
 };
 
 // gọi thêm một hàm khi chém
@@ -209,12 +103,11 @@ function slash() {
     else if (playerDirection == 'up') { gameState.player.anims.play('slash-up', true); }
     else if (playerDirection == 'down') { gameState.player.anims.play('slash-down', true); }
 }
-
-var speed = 100;
+var speed = 100
 // khi người chơi thao tác thì cái gì xảy ra:
 function update() {
     // gameState.cursors.{{ up/dow/left/right/space/shift }}.isDown : khi giữ phím
-    if (gameState.cursors.right.isDown) {
+    if (gameState.cursors.right.isDown || goRight) {
         // cho nhân vật di chuyển
         gameState.player.setVelocity(speed, 0)
         // chơi animation khi di chuyển phải
@@ -222,22 +115,22 @@ function update() {
         // lưu lại để dùng khi chém
         playerDirection = 'right'
     }
-    else if (gameState.cursors.left.isDown) {
+    else if (gameState.cursors.left.isDown || goLeft) {
         gameState.player.setVelocity(-speed, 0)
         gameState.player.anims.play('left', true);
         playerDirection = 'left'
     }
-    else if (gameState.cursors.up.isDown) {
+    else if (gameState.cursors.up.isDown || goUp) {
         gameState.player.setVelocity(0, -speed)
         gameState.player.anims.play('up', true);
         playerDirection = 'up'
     }
-    else if (gameState.cursors.down.isDown) {
+    else if (gameState.cursors.down.isDown || goDown) {
         gameState.player.setVelocity(0, speed)
         gameState.player.anims.play('down', true);
         playerDirection = 'down'
     }
-    else if (gameState.cursors.space.isDown) { slash(); }
+    else if (gameState.cursors.space.isDown || ifSlash) { slash(); }
     else {
         // không hoạt động gì
         gameState.player.anims.stop()
