@@ -6,16 +6,6 @@ const DEFAULT_HEIGHT = 400 // any height you want
 const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT
 const healthpoints = 100;
 
-
-// class Skeleton extends Phaser.Physics.Arcade.Sprite {
-//     constructor(scene, x, y, texture, frame) 
-//     {
-//         super(scene, x, y, texture, frame)
-
-//         this.anims.play('skeleton-idle-right', true)
-
-//     }
-// }
 // đây là lập nên cái canvas để mình chơi
 var config = {
     type: Phaser.AUTO,
@@ -59,9 +49,9 @@ function preload() {
 function create() {
     // tạo dungeon
     const music = this.sound.add("main_audio")
-    music.play();
-    var loop = music.loop;
-    music.setLoop(loop);
+    while (True) {
+        music.play();
+    }
     const map = this.make.tilemap({ key: 'dungeon' })
     const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles', 16, 16, 1, 2)
     map.createLayer(0, tileset, 0, 0)
