@@ -128,7 +128,7 @@ function create() {
     // skeleton khi di chuyen
     gameState.skeleton.anims.create({
         key: 'skeleton-idle-up',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 7 * 13, end: 7 * 13 + 7 }),
+        frames: this.anims.generateFrameNumbers('skeleton', { start: 8 * 13, end: 8 * 13 + 7 }),
         frameRate: 10,
         repeat: -1
     });
@@ -154,25 +154,25 @@ function create() {
     // skeleton khi dam
     gameState.skeleton.anims.create({
         key: 'skeleton-thrust-up',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 12 * 13, end: 12 * 13 + 7 }),
+        frames: this.anims.generateFrameNumbers('skeleton', { start: 4 * 13, end: 4 * 13 + 7 }),
         frameRate: 10,
         repeat: -1
     });
     gameState.skeleton.anims.create({
         key: 'skeleton-thrust-left',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 13 * 13, end: 13 * 13 + 7 }),
+        frames: this.anims.generateFrameNumbers('skeleton', { start: 5 * 13, end: 5 * 13 + 7 }),
         frameRate: 10,
         repeat: -1
     });
     gameState.skeleton.anims.create({
         key: 'skeleton-thrust-down',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 14 * 13, end: 14 * 13 + 7 }),
+        frames: this.anims.generateFrameNumbers('skeleton', { start: 6 * 13, end: 6 * 13 + 7 }),
         frameRate: 10,
         repeat: -1
     });
     gameState.skeleton.anims.create({
         key: 'skeleton-thrust-right',
-        frames: this.anims.generateFrameNumbers('skeleton', { start: 15 * 13, end: 15 * 13 + 7 }),
+        frames: this.anims.generateFrameNumbers('skeleton', { start: 7 * 13, end: 7 * 13 + 7 }),
         frameRate: 10,
         repeat: -1
     });
@@ -242,4 +242,5 @@ function update() {
         gameState.player.anims.stop()
         gameState.player.setVelocity(0, 0)
     }
+    gameState.skeleton.anims.play("skeleton-thrust-right", true)
 }
