@@ -19,3 +19,12 @@ Preview: https://tulinh1311.github.io/jsa/
   * Xây dựng menu để người chơi xem stat.
   
   ### Đợt 3: tính sau
+  
+ ## Đã làm:
+  * Xây dựng map và nhân vật
+  * Xây dựng animation nhân vật
+  * Nhân vật không thể đi xuyên qua tường
+  * camera đi theo nhân vật
+  * Thanh máu (hiển thị)
+  * minimap
+  * âm thanh nền
