@@ -54,7 +54,9 @@ function preload() {
 // khởi tạo các thành phần trong game
 function create() {
     // tạo dungeon
+    gameState.swordSound = this.sound.add('swordSound')
     const music = this.sound.add("main_audio", { loop: true })
+    music.play()
     const map = this.make.tilemap({ key: 'dungeon' })
     const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles', 16, 16, 1, 2)
     map.createLayer(0, tileset, 0, 0)
@@ -130,11 +132,12 @@ function update() {
         gameState.player.anims.play('down', true);
         playerDirection = 'down'
     }
-    else if (gameState.cursors.space.isDown || ifSlash) { slash(); }
+    else if (gameState.cursors.space.isDown || ifSlash) { slash(); gameState.swordSound.play()}
     else {
         // không hoạt động gì
         gameState.player.anims.stop()
         gameState.player.setVelocity(0, 0)
+
     }
     gameState.skeleton.anims.play("skeleton-thrust-right", true)
 }

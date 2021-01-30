@@ -2,6 +2,7 @@ const preloader = function(game) {
     // if (game)
     var number = 64
     game.load.audio('main_audio', 'https://labs.phaser.io/assets/audio/Andrea_Milana_-_Harlequin_-_The_Clockworks_-_Electribe_MX_REMIX.m4a')
+    game.load.audio('swordSound', 'https://labs.phaser.io/assets/audio/SoundEffects/sword.mp3')
     // gạch trong dungeon
     game.load.image('tiles', 'resource/0x72_DungeonTilesetII_v1.3.1/tileset.png');
     // dungeon map
