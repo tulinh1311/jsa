@@ -49,7 +49,7 @@ function preload() {
 function create() {
     // tạo dungeon
     const music = this.sound.add("main_audio")
-    while (True) {
+    for (let i = 0; i<10; i++) {
         music.play();
     }
     const map = this.make.tilemap({ key: 'dungeon' })
@@ -216,8 +216,6 @@ function update() {
     if (gameState.cursors.right.isDown) {
         // cho nhân vật di chuyển
         gameState.player.setVelocity(speed, 0)
-        baseBar.x = gameState.player.x - 15
-        baseBar.y = gameState.player.y
         // chơi animation khi di chuyển phải
         gameState.player.anims.play('right', true);
         // lưu lại để dùng khi chém
