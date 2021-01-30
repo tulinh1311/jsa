@@ -14,7 +14,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: false
+            debug: true
         }
     },
     scene: {
@@ -38,7 +38,7 @@ function preload() {
     // this.load.image('sky', 'https://labs.phaser.io/assets/skies/starfield.png');
 
     // gạch trong dungeon
-    this.load.image('tiles', 'resource/0x72_DungeonTilesetII_v1.3.1/0x72_DungeonTilesetII_v1.3.png');
+    this.load.image('tiles', 'resource/0x72_DungeonTilesetII_v1.3.1/tileset.png');
     // dungeon map
     this.load.tilemapTiledJSON('dungeon', 'resource/dungeon.json')
     // player
@@ -50,16 +50,17 @@ function preload() {
 function create() {
     // tạo dungeon
     const map = this.make.tilemap({ key: 'dungeon' })
-    const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles')
+    const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles', 16, 16, 1, 2)
     map.createLayer(0, tileset, 0, 0)
     const wallLayer = map.createLayer(1, tileset, 0, 0)
-    map.createLayer(2, tileset, 0, 0)
-    map.createLayer(3, tileset, 0, 0)
+    // map.createLayer(2, tileset, 0, 0)
+    // map.createLayer(3, tileset, 0, 0)
+    // map.createLayer(4, tileset, 0, 0)
 
     wallLayer.setCollisionByProperty({ collides: true })
 
     //tạo player
-    gameState.player = this.physics.add.sprite(200, 150, 'player');
+    gameState.player = this.physics.add.sprite(640, 1050, 'player');
     // sửa khung của player - tuyệt đói không xóa đi
     gameState.player.body.setSize(gameState.player.width * 0.5, gameState.player.height * 0.85)
 
@@ -123,6 +124,7 @@ function create() {
     this.cameras.main.startFollow(gameState.player);
     // minimap ở trên cùng
     this.minimap = this.cameras.add(0, 0, 200, 200).setZoom(0.05)
+
 };
 
 // gọi thêm một hàm khi chém
