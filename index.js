@@ -87,14 +87,14 @@ function create() {
     this.minimap = this.cameras.add(-50, -30, 200, 200).setZoom(0.05)
     healthBar(this)
 
-    gameState.arrowUp = this.add.image(100, 250, 'arrowUp').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goUp = true; this.alpha = 1}).on('pointerup', function () { goUp = false ; this.alpha = 0.7 });
-    gameState.arrowDown = this.add.image(100, 350, 'arrowDown').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goDown = true; this.alpha = 1 }).on('pointerup', function () { goDown = false; this.alpha = 0.7 });
-    gameState.arrowLeft = this.add.image(50, 300, 'arrowLeft').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goLeft = true; this.alpha = 1 }).on('pointerup', function () { goLeft = false; this.alpha = 0.7 });
-    gameState.arrowRight = this.add.image(150, 300, 'arrowRight').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goRight = true; this.alpha = 1 }).on('pointerup', function () { goRight = false; this.alpha = 0.7 });
-    gameState.slashButton = this.add.circle(700, 300, 50, 0xffffff, 0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { ifSlash = true; this.alpha = 1 }).on('pointerup', function () { ifSlash = false; this.alpha = 0.7 });
-    this.add.text(672, 295, 'Attack').setScrollFactor(0, 0)
-    gameState.musicOn = this.add.image(790, 20, 'musicOn').setScrollFactor(0, 0).setInteractive().setScale(0.7)
-    gameState.musicOff = this.add.image(790, 20, 'musicOff').setScrollFactor(0, 0). setInteractive().setScale(0.7)
+    gameState.arrowUp = this.add.image(100, DEFAULT_HEIGHT-150, 'arrowUp').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goUp = true; this.alpha = 1}).on('pointerup', function () { goUp = false ; this.alpha = 0.7 });
+    gameState.arrowDown = this.add.image(100, DEFAULT_HEIGHT-50, 'arrowDown').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goDown = true; this.alpha = 1 }).on('pointerup', function () { goDown = false; this.alpha = 0.7 });
+    gameState.arrowLeft = this.add.image(50, DEFAULT_HEIGHT-100, 'arrowLeft').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goLeft = true; this.alpha = 1 }).on('pointerup', function () { goLeft = false; this.alpha = 0.7 });
+    gameState.arrowRight = this.add.image(150, DEFAULT_HEIGHT-100, 'arrowRight').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goRight = true; this.alpha = 1 }).on('pointerup', function () { goRight = false; this.alpha = 0.7 });
+    gameState.slashButton = this.add.circle(DEFAULT_WIDTH-90, DEFAULT_HEIGHT-90, 50, 0xffffff, 0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { ifSlash = true; this.alpha = 1 }).on('pointerup', function () { ifSlash = false; this.alpha = 0.7 });
+    this.add.text(DEFAULT_WIDTH-117, DEFAULT_HEIGHT-95, 'Attack').setScrollFactor(0, 0)
+    gameState.musicOn = this.add.image(DEFAULT_WIDTH-30, 20, 'musicOn').setScrollFactor(0, 0).setInteractive().setScale(0.7)
+    gameState.musicOff = this.add.image(DEFAULT_WIDTH-30, 20, 'musicOff').setScrollFactor(0, 0). setInteractive().setScale(0.7)
     gameState.musicOff.visible = false
     gameState.musicOn.on('pointerdown', function() {
         game.sound.mute = true
