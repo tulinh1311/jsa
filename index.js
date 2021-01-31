@@ -1,7 +1,6 @@
 import { createCharacterAnims } from "./module/CharacterAnims.js";
 import { createSkeletonAnims } from "./module/EnemyAnims.js";
 import { healthBar } from "./module/HealthBar.js";
-import { moveDown, moveLeft, moveRight, moveUp } from "./module/Move.js";
 import { preloader } from "./module/Preloader.js";
 // import { start } from "./module/Startscene.js";
 
