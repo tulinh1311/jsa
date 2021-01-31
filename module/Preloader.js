@@ -77,6 +77,9 @@ const preloader = function(game) {
     game.load.image('arrowDown', 'resource/arrow/arrowDown.png')
     game.load.image('arrowLeft', 'resource/arrow/arrowLeft.png')
     game.load.image('arrowRight', 'resource/arrow/arrowRight.png')
+
+    game.load.image('musicOn', 'resource/musicOn.png')
+    game.load.image('musicOff', 'resource/musicOff.png')
 }
 
 export {

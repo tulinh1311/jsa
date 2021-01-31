@@ -93,6 +93,19 @@ function create() {
     gameState.arrowRight = this.add.image(150, 300, 'arrowRight').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goRight = true; this.alpha = 1 }).on('pointerup', function () { goRight = false; this.alpha = 0.7 });
     gameState.slashButton = this.add.circle(700, 300, 50, 0xffffff, 0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { ifSlash = true; this.alpha = 1 }).on('pointerup', function () { ifSlash = false; this.alpha = 0.7 });
     this.add.text(672, 295, 'Attack').setScrollFactor(0, 0)
+    gameState.musicOn = this.add.image(790, 20, 'musicOn').setScrollFactor(0, 0).setInteractive().setScale(0.7)
+    gameState.musicOff = this.add.image(790, 20, 'musicOff').setScrollFactor(0, 0). setInteractive().setScale(0.7)
+    gameState.musicOff.visible = false
+    gameState.musicOn.on('pointerdown', function() {
+        game.sound.mute = true
+        gameState.musicOff.visible = true
+        gameState.musicOn.visible = false
+    })
+    gameState.musicOff.on('pointerdown', function() {
+        game.sound.mute = false
+        gameState.musicOn.visible = true
+        gameState.musicOff.visible = false
+    })
 };
 
 // gọi thêm một hàm khi chém
@@ -140,4 +153,5 @@ function update() {
 
     }
     gameState.skeleton.anims.play("skeleton-thrust-right", true)
+
 }
