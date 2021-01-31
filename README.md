@@ -28,3 +28,8 @@ Preview: https://tulinh1311.github.io/jsa/
   * Thanh máu (hiển thị)
   * minimap
   * âm thanh nền
+
+## Giải thích file:
+  * **index.js:** file js chính
+  * **/resource:** folder đựng ảnh và map dungeon
+  * **/module:** folder đựng các file js export để dùng trong index.js
