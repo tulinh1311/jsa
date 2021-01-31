@@ -1,6 +1,7 @@
 import { createCharacterAnims } from "./module/CharacterAnims.js";
 import { createSkeletonAnims } from "./module/EnemyAnims.js";
 import { healthBar } from "./module/HealthBar.js";
+import { musicButton } from "./module/MusicButton.js";
 import { preloader } from "./module/Preloader.js";
 // import { start } from "./module/Startscene.js";
 
@@ -92,20 +93,9 @@ function create() {
     gameState.arrowLeft = this.add.image(50, DEFAULT_HEIGHT-100, 'arrowLeft').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goLeft = true; this.alpha = 1 }).on('pointerup', function () { goLeft = false; this.alpha = 0.7 });
     gameState.arrowRight = this.add.image(150, DEFAULT_HEIGHT-100, 'arrowRight').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goRight = true; this.alpha = 1 }).on('pointerup', function () { goRight = false; this.alpha = 0.7 });
     gameState.slashButton = this.add.circle(DEFAULT_WIDTH-90, DEFAULT_HEIGHT-90, 50, 0xffffff, 0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { ifSlash = true; this.alpha = 1 }).on('pointerup', function () { ifSlash = false; this.alpha = 0.7 });
-    this.add.text(DEFAULT_WIDTH-117, DEFAULT_HEIGHT-95, 'Attack').setScrollFactor(0, 0)
-    gameState.musicOn = this.add.image(DEFAULT_WIDTH-30, 20, 'musicOn').setScrollFactor(0, 0).setInteractive().setScale(0.7)
-    gameState.musicOff = this.add.image(DEFAULT_WIDTH-30, 20, 'musicOff').setScrollFactor(0, 0). setInteractive().setScale(0.7)
-    gameState.musicOff.visible = false
-    gameState.musicOn.on('pointerdown', function() {
-        game.sound.mute = true
-        gameState.musicOff.visible = true
-        gameState.musicOn.visible = false
-    })
-    gameState.musicOff.on('pointerdown', function() {
-        game.sound.mute = false
-        gameState.musicOn.visible = true
-        gameState.musicOff.visible = false
-    })
+    this.add.image(DEFAULT_WIDTH-90, DEFAULT_HEIGHT-90, 'gladius').setScrollFactor(0, 0).setScale(0.13)
+    
+    musicButton(this, DEFAULT_HEIGHT, DEFAULT_WIDTH)
 };
 
 // gọi thêm một hàm khi chém

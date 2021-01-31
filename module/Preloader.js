@@ -78,6 +78,8 @@ const preloader = function(game) {
     game.load.image('arrowLeft', 'resource/arrow/arrowLeft.png')
     game.load.image('arrowRight', 'resource/arrow/arrowRight.png')
 
+    game.load.image('gladius', 'resource/gladius.png')
+
     game.load.image('musicOn', 'resource/musicOn.png')
     game.load.image('musicOff', 'resource/musicOff.png')
 }
