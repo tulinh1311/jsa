@@ -33,6 +33,7 @@ export default class GameScene extends Phaser.Scene {
         super('game')
     }
 
+
     create() {
         gameState.swordSound = this.sound.add('swordSound')
         const music = this.sound.add("main_audio", { loop: true })
