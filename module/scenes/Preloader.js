@@ -86,6 +86,8 @@ export default class Preloader extends Phaser.Scene {
         this.load.image('musicOn', 'resource/musicOn.png')
         this.load.image('musicOff', 'resource/musicOff.png')
 
+        this.load.image('startbutton', 'resource/startbutton.png')
+
     }
 
     create() {

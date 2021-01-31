@@ -17,10 +17,11 @@ export default class Startscene extends Phaser.Scene {
         startState.startPlayer.anims.play('slash-down', true)
         this.cameras.main.startFollow(startState.startPlayer).setZoom(2)
     
-        startState.startButton = this.add.text(170, 150, 'START').setInteractive()
+        startState.startButton = this.add.image(190, 170, 'startbutton').setInteractive().setScale(0.05)
     }
     update() {
         startState.startButton.on('pointerdown', function() {
+            startState.startPlayer.anims.stop()
             startState.startBackground.destroy(),
             startState.startPlayer.destroy(),
             startState.startButton.destroy(),
