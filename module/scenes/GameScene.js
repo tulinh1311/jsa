@@ -1,9 +1,8 @@
-import { createCharacterAnims } from "./CharacterAnims.js";
-import { createSkeletonAnims } from "./EnemyAnims.js";
-import { healthBar } from "./HealthBar.js";
-import { musicButton } from "./MusicButton.js";
+import { createCharacterAnims } from "../CharacterAnims.js";
+import { createSkeletonAnims } from "../EnemyAnims.js";
+import { healthBar } from "../HealthBar.js";
+import { musicButton } from "../MusicButton.js";
 // import { preloader } from "./Preloader.js";
-// import { start } from "./Startscene.js";
 
 // gọi các biến, không xóa
 var gameState = {};
@@ -37,7 +36,7 @@ export default class GameScene extends Phaser.Scene {
     create() {
         gameState.swordSound = this.sound.add('swordSound')
         const music = this.sound.add("main_audio", { loop: true })
-        music.play()
+        // music.play()
         const map = this.make.tilemap({ key: 'dungeon' })
         const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles', 16, 16, 1, 2)
         map.createLayer(0, tileset, 0, 0)

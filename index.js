@@ -1,5 +1,6 @@
-import GameScene from "./module/GameScene.js";
-import Preloader from "./module/Preloader.js";
+import GameScene from "./module/scenes/GameScene.js";
+import Preloader from "./module/scenes/Preloader.js";
+import Startscene from "./module/scenes/Startscene.js";
 
 const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth)
 const DEFAULT_HEIGHT = 400 // any height you want
@@ -18,7 +19,7 @@ var config = {
     input :{
 		activePointers:3,
 	  },
-    scene: [Preloader, GameScene],
+    scene: [Preloader, Startscene, GameScene],
     scale: {
         zoom: 1.15,
         mode: Phaser.Scale.FIT,

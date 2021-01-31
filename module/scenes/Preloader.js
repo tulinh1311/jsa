@@ -85,9 +85,12 @@ export default class Preloader extends Phaser.Scene {
 
         this.load.image('musicOn', 'resource/musicOn.png')
         this.load.image('musicOff', 'resource/musicOff.png')
+
     }
 
     create() {
-        this.scene.start('game')
+        const music = this.sound.add("main_audio", { loop: true })
+        music.play()
+        this.scene.start('startscene')
     }
 }

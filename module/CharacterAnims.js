@@ -40,7 +40,7 @@ const createCharacterAnims = function (anims) {
         key: 'slash-down',
         frames: anims.generateFrameNumbers('slash', { start: 12, end: 17 }),
         frameRate: 10,
-        repeat: 1
+        repeat: -1
     });
     anims.create({
         key: 'slash-right',
