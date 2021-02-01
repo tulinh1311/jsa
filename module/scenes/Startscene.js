@@ -23,12 +23,6 @@ export default class Startscene extends Phaser.Scene {
     }
     update() {
         startState.startButton.on('pointerdown', function() {
-            startState.bg.destroy(),
-            startState.startBackground.destroy(),
-            startState.startPlayer.destroy(),
-            startState.startButton.destroy(),
-            startState.logo.destroy(),
-            this.cameras.remove(startState.camera),
             this.scene.start('game')
         }, this)
     }
