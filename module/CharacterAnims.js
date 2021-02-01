@@ -27,25 +27,25 @@ const createCharacterAnims = function (anims) {
     anims.create({
         key: 'slash-up',
         frames: anims.generateFrameNumbers('slash', { start: 0, end: 5 }),
-        frameRate: 10,
+        frameRate: 30,
         repeat: 1
     });
     anims.create({
         key: 'slash-left',
         frames: anims.generateFrameNumbers('slash', { start: 6, end: 11 }),
-        frameRate: 10,
+        frameRate: 30,
         repeat: 1
     });
     anims.create({
         key: 'slash-down',
         frames: anims.generateFrameNumbers('slash', { start: 12, end: 17 }),
-        frameRate: 10,
+        frameRate: 30,
         repeat: -1
     });
     anims.create({
         key: 'slash-right',
         frames: anims.generateFrameNumbers('slash', { start: 18, end: 23 }),
-        frameRate: 10,
+        frameRate: 30,
         repeat: 1
     });
 }

@@ -1,4 +1,3 @@
-import { createCharacterAnims } from "../CharacterAnims.js"
 
 const startState = {}
 export default class Startscene extends Phaser.Scene {
@@ -14,7 +13,13 @@ export default class Startscene extends Phaser.Scene {
         startState.startBackground.createLayer(2, startState.startTileset, 0, 0)
     
         startState.startPlayer = this.add.sprite(190, 120, 'slash', 12)
-        createCharacterAnims(startState.startPlayer.anims)
+        startState.startPlayer.anims.create({
+            key: 'slash-down',
+            frames: this.anims.generateFrameNumbers('slash', { start: 12, end: 17 }),
+            frameRate: 30,
+            repeat: -1,
+            repeatDelay: 300
+        });
         startState.startPlayer.anims.play('slash-down', true)
         startState.camera = this.cameras.main.centerOn(190, 80).setZoom(2)
     

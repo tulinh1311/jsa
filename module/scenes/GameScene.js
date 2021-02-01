@@ -35,9 +35,9 @@ export default class GameScene extends Phaser.Scene {
         super('game')
     }
 
-
     create() {
         gameState.swordSound = this.sound.add('swordSound')
+
         const map = this.make.tilemap({ key: 'dungeon' })
         const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles', 16, 16, 1, 2)
         map.createLayer(0, tileset, 0, 0)
@@ -111,7 +111,6 @@ export default class GameScene extends Phaser.Scene {
         else {
             // không hoạt động gì
             gameState.player.anims.stop()
-            this.time.addEvent({delay: 1000})
             gameState.player.setVelocity(0, 0)
         }
 
