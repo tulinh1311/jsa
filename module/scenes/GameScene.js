@@ -2,7 +2,6 @@ import { createCharacterAnims } from "../CharacterAnims.js";
 import { createSkeletonAnims } from "../EnemyAnims.js";
 import { healthBar } from "../HealthBar.js";
 import { musicButton } from "../MusicButton.js";
-// import { preloader } from "./Preloader.js";
 
 // gọi các biến, không xóa
 var gameState = {};
@@ -18,6 +17,8 @@ const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT
 const healthpoints = 100;
 var speed = 100;
 
+
+//animation khi nhân vật chém
 function slash() {
     if (playerDirection == 'right') {
         // animation khi chẻm và đang hướng phải
@@ -28,6 +29,7 @@ function slash() {
     else if (playerDirection == 'down') { gameState.player.anims.play('slash-down', true); }
 }
 
+// cảnh toàn game
 export default class GameScene extends Phaser.Scene {
     constructor() {
         super('game')
@@ -36,8 +38,6 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         gameState.swordSound = this.sound.add('swordSound')
-        const music = this.sound.add("main_audio", { loop: true })
-        // music.play()
         const map = this.make.tilemap({ key: 'dungeon' })
         const tileset = map.addTilesetImage('0x72_DungeonTilesetII_v1.3', 'tiles', 16, 16, 1, 2)
         map.createLayer(0, tileset, 0, 0)
@@ -67,7 +67,11 @@ export default class GameScene extends Phaser.Scene {
         // minimap ở trên cùng
         this.minimap = this.cameras.add(-50, -30, 200, 200).setZoom(0.05)
         healthBar(this)
+        musicButton(this, DEFAULT_HEIGHT, DEFAULT_WIDTH)
 
+
+
+        // responsive || touchscreen compatible 
         gameState.arrowUp = this.add.image(100, DEFAULT_HEIGHT - 150, 'arrowUp').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goUp = true; this.alpha = 1 }).on('pointerup', function () { goUp = false; this.alpha = 0.7 });
         gameState.arrowDown = this.add.image(100, DEFAULT_HEIGHT - 50, 'arrowDown').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goDown = true; this.alpha = 1 }).on('pointerup', function () { goDown = false; this.alpha = 0.7 });
         gameState.arrowLeft = this.add.image(50, DEFAULT_HEIGHT - 100, 'arrowLeft').setAlpha(0.7).setScale(0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { goLeft = true; this.alpha = 1 }).on('pointerup', function () { goLeft = false; this.alpha = 0.7 });
@@ -75,7 +79,6 @@ export default class GameScene extends Phaser.Scene {
         gameState.slashButton = this.add.circle(DEFAULT_WIDTH - 90, DEFAULT_HEIGHT - 90, 50, 0xffffff, 0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { ifSlash = true; this.alpha = 1 }).on('pointerup', function () { ifSlash = false; this.alpha = 0.7 });
         this.add.image(DEFAULT_WIDTH - 90, DEFAULT_HEIGHT - 90, 'gladius').setScrollFactor(0, 0).setScale(0.13)
 
-        musicButton(this, DEFAULT_HEIGHT, DEFAULT_WIDTH)
     }
 
     update() {
@@ -107,9 +110,11 @@ export default class GameScene extends Phaser.Scene {
         else {
             // không hoạt động gì
             gameState.player.anims.stop()
+            this.time.addEvent({delay: 1000})
             gameState.player.setVelocity(0, 0)
-
         }
+
+        // cho một con skeleton vào cho đẹp đã, tính sau:)
         gameState.skeleton.anims.play("skeleton-thrust-right", true)
     }
 }
