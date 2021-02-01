@@ -14,10 +14,12 @@ Preview: https://tulinh1311.github.io/jsa/
   ### Đợt 1: (đang làm)
   * Hoàn thiện bản đồ (map - 5 phòng), người chơi (player), quái.
   * Xây dựng stat cơ bản cho người chơi và quái.
+  * Xây dựng logic game
   * Người chơi sẽ có duy nhất một skill, có thể update thêm skill, nhưng ở các đợt sau
   
   ### Đợt 2:
   * Xây dựng cửa hàng (vũ khí, khiên, giáp)
+  * Làm cửa cho mỗi phòng
   * Xây dựng menu để người chơi xem stat.
   
   ### Đợt 3: tính sau
