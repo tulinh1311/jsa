@@ -1,7 +1,7 @@
 import { createCharacterAnims } from "../CharacterAnims.js";
 import { createSkeletonAnims } from "../EnemyAnims.js";
 import { healthBar } from "../HealthBar.js";
-import { musicButton } from "../MusicButton.js";
+import { musicButton, homeButton } from "../UIButton.js";
 
 // gọi các biến, không xóa
 var gameState = {};
@@ -67,6 +67,7 @@ export default class GameScene extends Phaser.Scene {
         // minimap ở trên cùng
         this.minimap = this.cameras.add(-50, -30, 200, 200).setZoom(0.05)
         healthBar(this)
+        homeButton(this, DEFAULT_HEIGHT, DEFAULT_WIDTH)
         musicButton(this, DEFAULT_HEIGHT, DEFAULT_WIDTH)
 
 
