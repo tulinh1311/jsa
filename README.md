@@ -5,11 +5,13 @@ Preview: https://tulinh1311.github.io/jsa/
 ## Framework / Game Engine / Other Materials
 * Phaser **3** ( https://phaser.io ) - rất thiên về JS, không có mấy CSS và HTML. 
   * Documentation: https://photonstorm.github.io/phaser3-docs/index.html
-* Chắc sẽ lấy hình ảnh cho nhân vật từ đây: https://github.com/sanderfrenken/Universal-LPC-Spritesheet-Character-Generator
+* Lấy hình ảnh cho nhân vật từ đây: https://github.com/sanderfrenken/Universal-LPC-Spritesheet-Character-Generator
   * Bản preview: https://sanderfrenken.github.io/Universal-LPC-Spritesheet-Character-Generator/
+  * File: /resource/spritesheet.png 
 * Map: Tutorial: https://youtu.be/_fK6MVLPrMA - sẽ dùng https://www.mapeditor.org để làm map và dùng tileset của https://0x72.itch.io/dungeontileset-ii
+  * Định dang file của dungeon là JSON 
 ## Mục tiêu:
-  ### Đợt 1:
+  ### Đợt 1: (đang làm)
   * Hoàn thiện bản đồ (map - 5 phòng), người chơi (player), quái.
   * Xây dựng stat cơ bản cho người chơi và quái.
   * Người chơi sẽ có duy nhất một skill, có thể update thêm skill, nhưng ở các đợt sau
@@ -27,7 +29,8 @@ Preview: https://tulinh1311.github.io/jsa/
   * camera đi theo nhân vật
   * Thanh máu (hiển thị)
   * minimap
-  * âm thanh nền
+  * âm thanh nền và bật/tắt âm thanh
+  * Start menu
 
 ## Giải thích file:
   * **index.js:** file js chính
