@@ -1,4 +1,4 @@
-import { createCharacterAnims } from "../CharacterAnims.js";
+import { createCharacterAnims, slash } from "../CharacterAnims.js";
 import { createSkeletonAnims } from "../EnemyAnims.js";
 import { healthBar } from "../HealthBar.js";
 import { musicButton, homeButton } from "../UIButton.js";
@@ -16,18 +16,6 @@ const DEFAULT_HEIGHT = 400 // any height you want
 const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT
 const healthpoints = 100;
 var speed = 100;
-
-
-//animation khi nhân vật chém
-function slash() {
-    if (playerDirection == 'right') {
-        // animation khi chẻm và đang hướng phải
-        gameState.player.anims.play('slash-right', true);
-    }
-    else if (playerDirection == 'left') { gameState.player.anims.play('slash-left', true); }
-    else if (playerDirection == 'up') { gameState.player.anims.play('slash-up', true); }
-    else if (playerDirection == 'down') { gameState.player.anims.play('slash-down', true); }
-}
 
 // cảnh toàn game
 export default class GameScene extends Phaser.Scene {
@@ -107,7 +95,7 @@ export default class GameScene extends Phaser.Scene {
             gameState.player.anims.play('down', true);
             playerDirection = 'down'
         }
-        else if (gameState.cursors.space.isDown || ifSlash) { slash(); gameState.swordSound.play() }
+        else if (gameState.cursors.space.isDown || ifSlash) { slash(gameState.player, playerDirection); gameState.swordSound.play() }
         else {
             // không hoạt động gì
             gameState.player.anims.stop()
