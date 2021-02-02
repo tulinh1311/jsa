@@ -17,7 +17,7 @@ const musicButton = function(game, DEFAULT_HEIGHT, DEFAULT_WIDTH) {
 const homeButton = function(game, DEFAULT_HEIGHT, DEFAULT_WIDTH) {
     const homeButton = game.add.image(DEFAULT_WIDTH-30, 20, 'homeButton').setScrollFactor(0, 0).setInteractive().setScale(0.7)
     homeButton.on('pointerdown', function() {
-        game.scene.start('startscene')
+        game.scene.switch('startscene')
     })
 }
 export {
