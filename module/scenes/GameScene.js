@@ -68,6 +68,10 @@ export default class GameScene extends Phaser.Scene {
         gameState.slashButton = this.add.circle(DEFAULT_WIDTH - 90, DEFAULT_HEIGHT - 90, 50, 0xffffff, 0.7).setScrollFactor(0, 0).setInteractive().on('pointerdown', function () { ifSlash = true; this.alpha = 1 }).on('pointerup', function () { ifSlash = false; this.alpha = 0.7 });
         this.add.image(DEFAULT_WIDTH - 90, DEFAULT_HEIGHT - 90, 'gladius').setScrollFactor(0, 0).setScale(0.13)
 
+        this.input.keyboard.on('keydown-' + 'T', function() {
+            gameState.player.x = 640;
+            gameState.player.y = 1050;
+        })
     }
 
     update() {

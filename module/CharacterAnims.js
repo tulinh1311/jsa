@@ -54,7 +54,7 @@ const createCharacterAnims = function (anims) {
     });
 }
 
-const slash = function(player, playerDirection) {
+const slash = function (player, playerDirection) {
     if (playerDirection == 'right') {
         player.anims.play('slash-right', true); // animation khi chẻm và đang hướng phải
     }
