@@ -1,3 +1,4 @@
+// import { Phaser } from "../../phaser.js";
 import { createCharacterAnims, slash } from "../CharacterAnims.js";
 import { createSkeletonAnims } from "../EnemyAnims.js";
 import { healthBar } from "../HealthBar.js";
@@ -14,8 +15,15 @@ var playerDirection;
 const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth)
 const DEFAULT_HEIGHT = 400 // any height you want
 const DEFAULT_WIDTH = ratio * DEFAULT_HEIGHT
-const healthpoints = 100;
+const healthpoints = 100;   
 var speed = 100;
+var speed1 = 50
+var UP = false
+var DOWN = false
+var RIGHT = false
+var LEFT = false
+var direction_enemy = true
+
 
 // cảnh toàn game
 export default class GameScene extends Phaser.Scene {
@@ -41,7 +49,11 @@ export default class GameScene extends Phaser.Scene {
         // sửa khung của player - tuyệt đói không xóa đi
         gameState.player.body.setSize(gameState.player.width * 0.5, gameState.player.height * 0.5)
         gameState.player.body.offset.y = 33
-        gameState.skeleton = this.add.sprite(600, 670, 'skeleton', 131)
+        // gameState.skeleton = this.physics.add.sprite(570, 1070, 'skeleton', 131)
+        gameState.skeleton = this.physics.add.sprite(550, 670, 'skeleton', 131)
+        gameState.skeleton.body.setSize(gameState.skeleton.width * 0.5, gameState.skeleton.height * 0.5)
+        gameState.skeleton.body.offset.y = 33
+// 
 
         createCharacterAnims(gameState.player.anims)
         createSkeletonAnims(gameState.skeleton.anims)
@@ -50,6 +62,8 @@ export default class GameScene extends Phaser.Scene {
         gameState.cursors = this.input.keyboard.createCursorKeys();
         // cho người chơi đâm vào tường chứ không xuyên qua
         this.physics.add.collider(gameState.player, wallLayer);
+        this.physics.add.collider(gameState.skeleton, wallLayer);
+
         // camera/cái nhìn sẽ đi theo người chơi
         this.cameras.main.startFollow(gameState.player);
         // minimap ở trên cùng
@@ -72,6 +86,30 @@ export default class GameScene extends Phaser.Scene {
             gameState.player.x = 640;
             gameState.player.y = 1050;
         })
+        setInterval(()=> {
+            const randomNum = Math.floor(Math.random()*4);
+            if(randomNum == 0){
+                UP=true 
+                RIGHT=false
+                LEFT = false
+                DOWN = false
+            }else if (randomNum==1){
+                UP=false
+                RIGHT=true
+                LEFT = false
+                DOWN = false
+            }else if (randomNum==2){
+                UP=false
+                RIGHT=false
+                LEFT = true
+                DOWN = false
+            }else if (randomNum==3){
+                UP=false
+                RIGHT=false
+                LEFT = false
+                DOWN = true
+            }
+        }, 2000)
     }
 
     update() {
@@ -107,6 +145,29 @@ export default class GameScene extends Phaser.Scene {
         }
 
         // cho một con skeleton vào cho đẹp đã, tính sau:)
-        gameState.skeleton.anims.play("skeleton-thrust-right", true)
+       
+        
+        switch (direction_enemy) {
+            
+            case direction_enemy==DOWN:    
+                gameState.skeleton.setVelocity(0, speed1)
+                gameState.skeleton.anims.play('skeleton-idle-down',true)
+                break  
+            case direction_enemy==UP :    
+                gameState.skeleton.anims.play('skeleton-idle-up',true)
+                gameState.skeleton.setVelocity(0, -speed1) 
+                break   
+            case direction_enemy==RIGHT:    
+                gameState.skeleton.setVelocity(speed1 ,0 ) 
+                gameState.skeleton.anims.play('skeleton-idle-right',true)
+                break    
+            case direction_enemy==LEFT:    
+                gameState.skeleton.setVelocity(-speed1, 0) 
+                gameState.skeleton.anims.play('skeleton-idle-left',true)
+                break 
+        } 
+
+
+        
     }
 }
